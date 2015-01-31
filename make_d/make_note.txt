@@ -2,7 +2,7 @@ make format:
 *******************************************************************************
 
 RULE       |     target : prerequisite.
-           |             command | recipe | action, you name it.
+           |          [TAB] recipe
 
 
 *******************************************************************************
@@ -50,4 +50,15 @@ RULE       |     target : prerequisite.
   $@ stands for the file name of the target of the rule.
 
   @? stands for any prerequistes that are newer than the target.
+
+
+- recursive make
+  recipe would be like:
+    cd sub_dir && $(MAKE)
+      OR
+    $(MAKE) -C sub_dir
+  always use $(MAKE) variable, never use 'make', to make sure sub-make usee same $(MAKE)
+  as top-level
+
+
 
