@@ -1,0 +1,45 @@
+make format:
+*******************************************************************************
+
+RULE       |     target : prerequisite.
+           |             command | recipe | action, you name it.
+
+
+*******************************************************************************
+
+- by default make will execute the first rule it sees in a make file;
+
+- both files and targets can be prerequisite;
+
+- phony target:
+  A phony target is one that is not really the name of file.
+  such rule has to request explictly
+  if by accident the target named a file, then the rule may not excute.
+  .PHONY make sure the target stay phony
+
+- empty target:
+  A variant of phony target, hold recipe part which you request EXPLICITLY;
+  empty target's file can either exists or not;
+  empty target is used for record changes inside the recipe; for example, last
+  change in recipe is 'touch emtpy_target' then this target will run every time
+  
+
+- special targets:
+
+  .PHONY : prerequisite(s)
+  such targets/requisite(s) will run UNCONDITIONALLY, regardless of whether file(s) of such 
+  target(s) exists or not;
+
+- rule without prerequisite or recipe, and target is non-exist file.
+  make consider this virtual target always outdated, and run its virtual recipe
+  this implies that all target depends on such target will always run it recipe
+
+    clean: FORCE
+          rm $(objects)
+    FORCE:
+  
+    is equavilent to:
+
+    clean:
+          rm $(objects)
+    .PHONY : clean
