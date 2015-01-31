@@ -43,3 +43,11 @@ RULE       |     target : prerequisite.
     clean:
           rm $(objects)
     .PHONY : clean
+- multiple targets in a rule
+  when targets only differ from the filenames, they depends on the same prerequisite
+  and recipe.
+
+  $@ stands for the file name of the target of the rule.
+
+  @? stands for any prerequistes that are newer than the target.
+
