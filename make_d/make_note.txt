@@ -61,4 +61,9 @@ RULE       |     target : prerequisite.
   as top-level
 
 
+- make variables
+  . variable works by strict text substitution
+  . variables and functions are expanded when read, almost in all part of mekfile
+    except when variables/functions are defined using 'define' or on the right side
+    of '=' when define.
 
