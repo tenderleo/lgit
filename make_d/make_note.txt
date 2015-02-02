@@ -15,7 +15,7 @@ RULE       |     target : prerequisite.
   A phony target is one that is not really the name of file.
   such rule has to request explictly
   if by accident the target named a file, then the rule may not excute.
-  .PHONY make sure the target stay phony
+  .PHONY make sure the target stay phony,will always execute when request.
 
 - empty target:
   A variant of phony target, hold recipe part which you request EXPLICITLY;

@@ -1,2 +1,7 @@
 all : 
-	@echo 'Hello world'
+ifeq "xx" "xx"
+		@echo 'Hello world'
+endif
+
+
+	@echo $(sort foo bar lose)
