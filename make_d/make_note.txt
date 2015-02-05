@@ -67,3 +67,12 @@ RULE       |     target : prerequisite.
     except when variables/functions are defined using 'define' or on the right side
     of '=' when define.
 
+
+- conditional statement in make
+
+  . Extra spaces are allowed/ignored at the beginning og conditional directive
+  . A tab is NOT allowed at the beginning of conditional directive
+  . Any extra spaces in the directive are allowed, except directive name, variables.
+
+ 
+
