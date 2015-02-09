@@ -82,4 +82,4 @@ RULE       |     target : prerequisite.
     otherwise, text-if-false
   . `ifdef variable_name` is its only format, if variable_name begins/ends with (|"|' or )|"|'
     it will be considered as part of the variable_name, 
-
+  . the `variable_name` text is expanded if it is reference to a variable.
