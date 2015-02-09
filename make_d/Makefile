@@ -10,3 +10,10 @@ ifeq (  $(gcc) , gcc )
 else
 	@echo '$(gcc) is  found'
 endif	
+
+# ifdef statement
+ifdef (XMX)
+	@echo ' XMX is defined'
+else
+	@echo 'XMX is not defined'
+endif	

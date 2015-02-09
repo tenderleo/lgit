@@ -75,5 +75,11 @@ RULE       |     target : prerequisite.
   . Any extra spaces in the directive are allowed, except directive name, variables.
   . Each recipe inside text-if-true/false should be written as it is not in the conditional
     statement.
- 
+- ifdef statement
+  . FORMAT = `ifdef variable_name`
+  . 'ifdef' takes the name of a variable, NOT the reference( $(var) such format)
+  . it  evaluates the value of 'variable which name points to', if not empty, text-if-true
+    otherwise, text-if-false
+  . `ifdef variable_name` is its only format, if variable_name begins/ends with (|"|' or )|"|'
+    it will be considered as part of the variable_name, 
 
