@@ -73,6 +73,7 @@ RULE       |     target : prerequisite.
   . Extra spaces are allowed/ignored at the beginning og conditional directive
   . A tab is NOT allowed at the beginning of conditional directive
   . Any extra spaces in the directive are allowed, except directive name, variables.
-
+  . Each recipe inside text-if-true/false should be written as it is not in the conditional
+    statement.
  
 
