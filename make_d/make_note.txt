@@ -66,13 +66,21 @@ RULE       |     target : prerequisite.
   . variables and functions are expanded when read, almost in all part of mekfile
     except when variables/functions are defined using 'define' or on the right side
     of '=' when define.
-
+  . why '=' and ':=' works differently when used insde 'ifdef var_name' statement.
 
 - conditional statement in make
 
   . Extra spaces are allowed/ignored at the beginning og conditional directive
   . A tab is NOT allowed at the beginning of conditional directive
   . Any extra spaces in the directive are allowed, except directive name, variables.
-
- 
+  . Each recipe inside text-if-true/false should be written as it is not in the conditional
+    statement.
+- ifdef statement
+  . FORMAT = `ifdef variable_name`
+  . 'ifdef' takes the name of a variable, NOT the reference( $(var) such format)
+  . it  evaluates the value of 'variable which name points to', if not empty, text-if-true
+    otherwise, text-if-false
+  . `ifdef variable_name` is its only format, if variable_name begins/ends with (|"|' or )|"|'
+    it will be considered as part of the variable_name, 
+  . the `variable_name` text is expanded if it is reference to a variable.
 
