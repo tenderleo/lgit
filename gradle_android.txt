@@ -1,0 +1,58 @@
+android build plugin for Gradle include configuration blocks:
+
+  - buildTypes{ BuildType, ...} # delegates to each BuildType 
+  - defaultConfig { }    # delegates to ProductFlavor
+  - packagingOptions { } # delegates to PackagingOptions
+  - testOptions { } # delegates to TestOptions
+
+android build plugin for Gradle contains a set of DSL types:
+
+  * BuildType
+      - Properties
+         + applicationIdSuffix
+         + debuggable 
+         + jniDebuggable 
+         + minifyEnabled 
+         + multiDexEnabled 
+         + renderscriptDebuggable 
+         + signgingConfig 
+         + versionConfig 
+         + zipAlignEnabled 
+
+      - Methods
+         + proguardFile(pFile)
+         + proguardFiles(pFileArray)
+         + proguardFile(pFileIterable)
+
+  * ProductFlavor
+      - Properties
+         + applicationId
+         + multiDexEnabled 
+         + signingConfig
+         + testApplicationId
+         + testFunctionalTest
+         + testHandleProfiling
+         + testInstrumentationRunner
+         + versionCode
+         + versionName
+
+      - Mehtods
+         + miniSdkVersion 
+         + proguardFile
+         + proguardFiles
+         + setProguardFiles
+         + targetSdkVersion
+
+  * PackagingOptions
+      - Properties
+         + excludes
+         + pickFirsts
+
+      - Methods
+         + exclude(path)
+         + pickFirst(path)
+  * TestOptions
+      - Properties
+         + reportDir
+         + resultsDir
+
