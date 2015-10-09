@@ -50,22 +50,28 @@ to let gradle know how to sign your apk, you need:
 
 
 0. signingConfigs {
+    release{
       storeFile file(new File(""))
       storePassword "password"
       keyAlias      "alias"
       keyPassword   "password"
+    }
+    flavor1{
+        ...
+    }
   }
 
 1. buildTypes{
     release {
         signingConfig sigingConfigs.release
+        productFlavors.flavor1.signingConfig signingCofigs.flavor1
     }  
   }
 
 with this 2 steps, gradle will generate a job for assembleRelease.
 
 
------------------------10.7.2015----------------------------------------------
+-----------------------10.8.2015----------------------------------------------
 to add your_lib_name.so into your gradle project.
 0. under your source tree
     main/jniLibs/armeabi/your_lib_name.so
@@ -82,5 +88,55 @@ it is required under libs/patt, there is one more layer called armeabi-v7a, then
 it contains your  your_lib_name.so.
 --
 it will create a link in your Android studio project view.
+
+
+-----------------------10.9.2015----------------------------------------------
+to build different versions of your application, you need specify productFlavors
+in build.gradle
+
+productFlavors{
+  flavor1{
+
+  }
+  flavor2{
+  }
+}
+now in your gradle view in Android studio, you should see a set of build variant
+flavor1 + buildType[release | debug]
+flavor2 + buildType
+
+with different flavors, now you can customize your projects to build different app with vary config.
+
+
++src/
++   +main/              <------ unflavored source will get picked if other flavors has no counterparts. 
++   +   java/
++   +   res/
++   +   AndroidManifest.xml
++   +flavor1/           <------ responding files will override the unflavored ones.
++   +   java/
++   +       com/package/path/
++   +           flavor_specific.java  <----- don't include this in main unflavor.
++   +   res/
++   +   AndroidManifest.xml
+
+****-------******
+Resource Merging
+buildType -> Flavor -> main -> Dependencies.
+
+****-------******
+you should notice that
+ *  resources are NOT MERGED BASED ON FILE_LEVEL, BUT ACTUALLY BASED ON RESOURCE-LEVEL.
+    i.e. read the files, pick the content of unflavored, override/add flavored.
+ *  code files are treated differently, they don't override each other, android gradle tools simply
+    combine them, i.e. put them into the same package, if you have same class in both flavored and unflavored
+    resource, build system will complain that you have duplicate classes defined.to let different flavors have
+    different implementation on a class, you have to omit them in the unflavored source code.
+
+****-------******
+main flavor[the unflavored one ] will and should never refer to resource/code/string/etc which are specific to
+to only part of all the flavors. if you do, build will fail if you try to build a flavor that has not such resource.
+****-------******
+
 
 
