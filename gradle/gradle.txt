@@ -1,3 +1,86 @@
 Gradle
+  * when gradle command execute, it look for a file called build.gradle, which is a 
+    BUILD SCRIPT, strictly a build config script. this script defines the projects
+    and its tasks.
+  * Gradle build script IS Groovy code. period
+  * when you define a task, you can also declare its denpendency as:
+      task dependent(dependsOn: 'another_task') << {action}
+   or dependent.dependsOn task_dependency_list.
+  
+  build.gradle -------1:1---------Project
+  Project ------------1:N---------task(s)
 
-  Project
+
+
+dependencies is an DSL element belongs to standard gradle API, so it is on the same 
+level as android DSL elemnt.
+
+dependencies {
+  ...
+}
+android {
+  ...
+}
+
+to config your project depends on an external library jar, do:
+dependencies {
+  compile files('path/to/foo.jar')
+}
+
+the compile element will add foo.jar into your application compilation classpath,
+also pack it into APK.
+
+there will be always 2+ types of APK build:
+
+  compile and compile<buildType>
+
+
+so :
+
+dependencies{
+  compile : main application
+  androidTestCompile:
+  debugCompile:
+  releaseCompile:
+}
+
+-----------------------10.7.2015----------------------------------------------
+to let gradle know how to sign your apk, you need:
+
+
+
+0. signingConfigs {
+      storeFile file(new File(""))
+      storePassword "password"
+      keyAlias      "alias"
+      keyPassword   "password"
+  }
+
+1. buildTypes{
+    release {
+        signingConfig sigingConfigs.release
+    }  
+  }
+
+with this 2 steps, gradle will generate a job for assembleRelease.
+
+
+-----------------------10.7.2015----------------------------------------------
+to add your_lib_name.so into your gradle project.
+0. under your source tree
+    main/jniLibs/armeabi/your_lib_name.so
+OR
+1. android {
+    sourceSets {
+        main {
+          jniLibs.srcDirs = ["libs/path"]
+        }
+    }
+}
+
+it is required under libs/patt, there is one more layer called armeabi-v7a, then 
+it contains your  your_lib_name.so.
+--
+it will create a link in your Android studio project view.
+
+
