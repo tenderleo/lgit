@@ -11,6 +11,7 @@ class Base {
 
 };
 
+// make small comment
 class Derived: private Base {
   public:
     Derived();
